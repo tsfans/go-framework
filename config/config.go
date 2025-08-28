@@ -62,7 +62,7 @@ func (cfg *ConfigManger) load() {
 
 	fileInfo, err := os.Stat(cfg.path)
 	if err != nil {
-		log.Errorf("stat config file error: %s", err)
+		log.Panicf("stat config file error: %s", err)
 		return
 	}
 
@@ -72,17 +72,17 @@ func (cfg *ConfigManger) load() {
 
 	data, err := os.ReadFile(config.path)
 	if err != nil {
-		log.Errorf("read config file error: %s", err)
+		log.Panicf("read config file error: %s", err)
 	}
 
 	err = yaml.Unmarshal(data, &config.config)
 	if err != nil {
-		log.Errorf("unmarshal config file error: %s", err)
+		log.Panicf("unmarshal config file error: %s", err)
 	}
 
 	now := time.Now()
 	config.lastModified = &now
-	log.Infof("config file loaded: %s", config.path)
+	log.Debugf("config file loaded: %s", config.path)
 }
 
 func (cfg *ConfigManger) Get(key string) any {

@@ -66,14 +66,14 @@ func initPostgreDB() {
 		Logger: newLogger,
 	})
 	if err != nil {
-		log.Errorf("connect postgre error: %s", err)
+		log.Panicf("connect postgre error: %s", err)
 		return
 	}
 
 	// 设置连接池
 	sqlDB, err := DB.DB()
 	if err != nil {
-		log.Errorf("get postgre connection error: %s", err)
+		log.Panicf("get postgre connection error: %s", err)
 		return
 	}
 	sqlDB.SetMaxIdleConns(cfg.MaxIdleCount)
